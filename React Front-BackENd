@@ -1,7 +1,0 @@
-npx create-react-app appname
-
---- create backend folder outside the react app
----- in backend terminal ----
-npm init 
-npm i express
-npm i mongoose
