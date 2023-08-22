@@ -1,22 +1,23 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import noteContext from "../context/notes/noteContext";
 import Noteitem from "./NoteItem";
 import AddNote from "./AddNote";
 
 const Notes = () => {
   const context = useContext(noteContext);
-  // eslint-disable-next-line
-  const { notes } = context;
+  const { notes, getNotes } = context;
+  useEffect(() => {
+    getNotes();
+    // eslint-disable-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <>
       <AddNote />
-      <div className="container my-4">
+      <div className="row my-3">
         <h2>You Notes</h2>
-        <div className="row">
-          {notes.map((note) => {
-            return <Noteitem key={note._id} note={note} />;
-          })}
-        </div>
+        {notes.map((note) => {
+          return <Noteitem key={note._id} note={note} />;
+        })}
       </div>
     </>
   );
