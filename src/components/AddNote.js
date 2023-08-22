@@ -4,50 +4,64 @@ import noteContext from "../context/notes/noteContext";
 const AddNote = () => {
   const context = useContext(noteContext);
   const { addNote } = context;
-  let blankText = { title: "", description: "", tag: "general" };
-  const [note, setNote] = useState(blankText);
 
-  const onChange = (e) => {
-    setNote({ ...note, [e.target.name]: e.target.value });
-  };
+  const [note, setNote] = useState({
+    title: "",
+    description: "",
+    tag: "default",
+  });
 
-  //add new note
   const handleClick = (e) => {
     e.preventDefault();
     addNote(note.title, note.description, note.tag);
   };
 
+  const onChange = (e) => {
+    setNote({ ...note, [e.target.name]: e.target.value });
+  };
   return (
-    <div className="container">
+    <div className="container my-3">
       <h2>Add a Note</h2>
       <form className="my-3">
         <div className="mb-3">
-          <label htmlFor="exampleInputEmail1" className="form-label">
+          <label htmlFor="title" className="form-label">
             Title
           </label>
           <input
-            onChange={onChange}
             type="text"
             className="form-control"
             id="title"
-            htmlFor="title"
             name="title"
+            aria-describedby="emailHelp"
+            onChange={onChange}
           />
         </div>
         <div className="mb-3">
-          <label htmlFor="exampleInputPassword1" className="form-label">
+          <label htmlFor="description" className="form-label">
             Description
           </label>
           <input
-            onChange={onChange}
             type="text"
             className="form-control"
             id="description"
             name="description"
-            htmlFor="description"
+            onChange={onChange}
           />
         </div>
-        <button type="submit" onClick={handleClick} className="btn btn-primary">
+        <div className="mb-3">
+          <label htmlFor="tag" className="form-label">
+            Tag
+          </label>
+          <input
+            type="text"
+            className="form-control"
+            id="tag"
+            name="tag"
+            onChange={onChange}
+          />
+        </div>
+
+        <button type="submit" className="btn btn-primary" onClick={handleClick}>
           Add Note
         </button>
       </form>
